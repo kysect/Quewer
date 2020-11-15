@@ -19,6 +19,6 @@ namespace Quewer.BotClient.Commands.QueamCommands
 
         public string CommandName { get; } = "add-queam-queser";
         public string Description { get; }
-        public string[] Args { get; } = { "Queam name, Queser id" };
+        public string[] Args { get; } = { "Queam name", "Queser id" };
     }
 }
