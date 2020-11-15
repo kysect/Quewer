@@ -19,6 +19,6 @@ namespace Quewer.BotClient.Commands.QueCommands
 
         public string CommandName { get; } = "que-swap";
         public string Description { get; }
-        public string[] Args { get; } = { "Que name, Queser id" };
+        public string[] Args { get; } = { "Que name", "Queser id" };
     }
 }
