@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Quewer.Core.Enums;
+using Quewer.Core.Tools;
 
 namespace Quewer.Core.Models
 {
@@ -15,7 +17,7 @@ namespace Quewer.Core.Models
         {
             Id = Guid.NewGuid();
             Name = name;
-            QueamQuesers = new List<QueamQueser>() { QueamQueser.CreateCreator(this, creator) };
+            QueamQuesers = new List<QueamQueser> { QueamQueser.CreateCreator(this, creator) };
             Ques = new List<Que>();
         }
 
@@ -23,5 +25,19 @@ namespace Quewer.Core.Models
         {
             return new Queam(name, creator);
         }
+
+        public Que CreateNewQue(Queser queser, string title)
+        {
+            QueamQueser queamQueser = FindMember(queser) ?? throw QuewerException.IsNotQuemMember();
+            if (queamQueser.Role != QueamQueserRole.Admin && queamQueser.Role != QueamQueserRole.Creator)
+                throw new QuewerException("Not enough permission");
+
+            var que = Que.Create(this, title);
+
+            Ques.Add(que);
+            return que;
+        }
+
+        public QueamQueser FindMember(Queser queser) => QueamQuesers.Find(qq => qq.Id == queser.Id);
     }
 }
