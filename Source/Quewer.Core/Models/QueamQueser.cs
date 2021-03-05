@@ -6,18 +6,22 @@ namespace Quewer.Core.Models
     public class QueamQueser
     {
         public Guid Id { get; set; }
-        public Queam Queam { get; private set; }
+        public virtual Queam Queam { get; private set; }
 
-        public Queser Queser { get; private set; }
+        public virtual Queser Queser { get; private set; }
 
-        public QueamQueserRole Role { get; private set; }
+        public virtual QueamQueserRole Role { get; private set; }
 
-        private QueamQueser(Queam queam, Queser queser, QueamQueserRole role)
+        private QueamQueser(Queam queam, Queser queser, QueamQueserRole role) : this()
         {
             Id = Guid.NewGuid();
             Queam = queam;
             Queser = queser;
             Role = role;
+        }
+
+        protected QueamQueser()
+        {
         }
 
         public static QueamQueser Create(Queam queam, Queser queser, QueamQueserRole role)
