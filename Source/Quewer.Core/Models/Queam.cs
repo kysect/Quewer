@@ -38,6 +38,6 @@ namespace Quewer.Core.Models
             return que;
         }
 
-        public QueamQueser FindMember(Queser queser) => QueamQuesers.Find(qq => qq.Id == queser.Id);
+        public QueamQueser FindMember(Queser queser) => QueamQuesers.Find(qq => qq.Queser.Id == queser.Id);
     }
 }
