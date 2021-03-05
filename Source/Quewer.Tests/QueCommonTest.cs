@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Quewer.Core.DataAccess;
 using Quewer.Core.Models;
+using Quewer.Core.Services;
 
 namespace Quewer.Tests
 {
@@ -21,6 +24,18 @@ namespace Quewer.Tests
             que.Push(queser1, null);
 
             Assert.IsTrue(que.QueQueamQuesers.Any(q => q.QueamQueser.Queser.Id == queser1.Id));
+        }
+
+        [Test]
+        public void QueServiceTest()
+        {
+            QuewerDbContext quewerDbContext = TestDatabaseProvider.GetDatabaseContext();
+            var quewerService = new QuewerService(quewerDbContext);
+
+            quewerService.CreateQueser("name");
+            List<Queser> quesers = quewerService.ReadAll();
+
+            Assert.AreEqual(1, quesers.Count);
         }
     }
 }
