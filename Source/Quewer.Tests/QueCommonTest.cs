@@ -15,7 +15,7 @@ namespace Quewer.Tests
         }
 
         [Test]
-        public void Test1()
+        public void PushToQue_EnsureUserInQue()
         {
             var queser1 = Queser.Create("Name1");
             var queam = Queam.Create("Team 1", queser1);
