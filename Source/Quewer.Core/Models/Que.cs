@@ -8,11 +8,11 @@ namespace Quewer.Core.Models
     public class Que
     {
         public Guid Id { get; set; }
-        public Queam Queam { get; set; }
         public string Title { get; set; }
         public DateTime CreationTimeUtc { get; set; }
 
-        public List<QueQueamQueser> QueQueamQuesers { get; set; }
+        public virtual Queam Queam { get; set; }
+        public virtual List<QueQueamQueser> QueQueamQuesers { get; set; }
 
         public static Que Create(Queam queam, string title)
         {
