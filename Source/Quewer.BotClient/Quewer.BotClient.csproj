@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tef.BotFramework" Version="0.9.64" />
+    <PackageReference Include="Kysect.BotFramework" Version="0.1.0" />
   </ItemGroup>
 
 </Project>

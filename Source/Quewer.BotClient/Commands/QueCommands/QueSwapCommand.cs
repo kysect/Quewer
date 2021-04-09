@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using FluentResults;
-using Tef.BotFramework.Abstractions;
-using Tef.BotFramework.Core;
+using Kysect.BotFramework.Core.CommandInvoking;
 
 namespace Quewer.BotClient.Commands.QueCommands
 {
