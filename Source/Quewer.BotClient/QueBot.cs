@@ -1,19 +1,19 @@
 ﻿using System;
+using Kysect.BotFramework.ApiProviders;
+using Kysect.BotFramework.Core;
 using Quewer.BotClient.Commands.QueamCommands;
 using Quewer.BotClient.Commands.QueCommands;
 using Serilog;
-using Tef.BotFramework.Abstractions;
-using Tef.BotFramework.Core;
 
 namespace Quewer.BotClient
 {
     public class QueBot : IDisposable
     {
-        private readonly Bot _botInstance;
+        private readonly BotManager _botInstance;
 
         public QueBot(IBotApiProvider apiProvider, ILogger logger)
         {
-            _botInstance = new Bot(apiProvider)
+            _botInstance = new BotManager(apiProvider)
                 .AddCommand(new AddQueamQueserCommand())
                 .AddCommand(new CreateQueamCommand())
                 .AddCommand(new DeleteQueamCommand())
