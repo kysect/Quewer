@@ -6,6 +6,13 @@ namespace Quewer.BotClient.Commands.QueCommands
 {
     public class CreateQueCommand : IBotCommand
     {
+        public class Descriptor : BotCommandDescriptor<CreateQueCommand>
+        {
+            public Descriptor() : base("create-que", string.Empty, new[] { "Queam name" })
+            {
+            }
+        }
+
         public Result CanExecute(CommandArgumentContainer args)
         {
             throw new System.NotImplementedException();
@@ -15,9 +22,5 @@ namespace Quewer.BotClient.Commands.QueCommands
         {
             throw new System.NotImplementedException();
         }
-
-        public string CommandName { get; } = "create-que";
-        public string Description { get; }
-        public string[] Args { get; } = { "Que name" };
     }
 }

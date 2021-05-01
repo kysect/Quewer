@@ -6,6 +6,13 @@ namespace Quewer.BotClient.Commands.QueCommands
 {
     public class DeleteQueCommand : IBotCommand
     {
+        public class Descriptor : BotCommandDescriptor<DeleteQueCommand>
+        {
+            public Descriptor() : base("delete-que", string.Empty, new[] { "Que name" })
+            {
+            }
+        }
+
         public Result CanExecute(CommandArgumentContainer args)
         {
             throw new System.NotImplementedException();
@@ -15,9 +22,5 @@ namespace Quewer.BotClient.Commands.QueCommands
         {
             throw new System.NotImplementedException();
         }
-
-        public string CommandName { get; } = "delete-que";
-        public string Description { get; }
-        public string[] Args { get; } = { "Que name" };
     }
 }

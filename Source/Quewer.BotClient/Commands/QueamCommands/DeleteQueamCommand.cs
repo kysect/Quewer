@@ -6,6 +6,13 @@ namespace Quewer.BotClient.Commands.QueamCommands
 {
     public class DeleteQueamCommand : IBotCommand
     {
+        public class Descriptor : BotCommandDescriptor<DeleteQueamCommand>
+        {
+            public Descriptor() : base("delete-queam", string.Empty, new[] { "Queam name" })
+            {
+            }
+        }
+
         public Result CanExecute(CommandArgumentContainer args)
         {
             throw new System.NotImplementedException();
@@ -15,9 +22,5 @@ namespace Quewer.BotClient.Commands.QueamCommands
         {
             throw new System.NotImplementedException();
         }
-
-        public string CommandName { get; } = "delete-queam";
-        public string Description { get; }
-        public string[] Args { get; } = {"Queam name"};
     }
 }

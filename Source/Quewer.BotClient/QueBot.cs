@@ -13,18 +13,21 @@ namespace Quewer.BotClient
 
         public QueBot(IBotApiProvider apiProvider, ILogger logger)
         {
-            _botInstance = new BotManager(apiProvider)
-                .AddCommand(new AddQueamQueserCommand())
-                .AddCommand(new CreateQueamCommand())
-                .AddCommand(new DeleteQueamCommand())
-                .AddCommand(new RemoveQueamQueserCommand())
-                .AddCommand(new CreateQueCommand())
-                .AddCommand(new DeleteQueCommand())
-                .AddCommand(new QuePopCommand())
-                .AddCommand(new QuePushCommand())
-                .AddCommand(new QueSwapCommand())
+            BotManagerBuilder builder = new BotManagerBuilder()
                 .AddLogger(logger)
-                .SetPrefix('/');
+                .SetPrefix('/')
+                .AddCommand(new AddQueamQueserCommand.Descriptor())
+                .AddCommand(new AddQueamQueserCommand.Descriptor())
+                .AddCommand(new CreateQueamCommand.Descriptor())
+                .AddCommand(new DeleteQueamCommand.Descriptor())
+                .AddCommand(new RemoveQueamQueserCommand.Descriptor())
+                .AddCommand(new CreateQueCommand.Descriptor())
+                .AddCommand(new DeleteQueCommand.Descriptor())
+                .AddCommand(new QuePopCommand.Descriptor())
+                .AddCommand(new QuePushCommand.Descriptor())
+                .AddCommand(new QueSwapCommand.Descriptor());
+
+            _botInstance = builder.Build(apiProvider);
         }
 
         public void Start()

@@ -6,6 +6,13 @@ namespace Quewer.BotClient.Commands.QueamCommands
 {
     public class CreateQueamCommand : IBotCommand
     {
+        public class Descriptor : BotCommandDescriptor<CreateQueamCommand>
+        {
+            public Descriptor() : base("create-queam", string.Empty, new[] { "Queam name" })
+            {
+            }
+        }
+
         public Result CanExecute(CommandArgumentContainer args)
         {
             throw new System.NotImplementedException();
@@ -15,9 +22,5 @@ namespace Quewer.BotClient.Commands.QueamCommands
         {
             throw new System.NotImplementedException();
         }
-
-        public string CommandName { get; } = "create-queam";
-        public string Description { get; }
-        public string[] Args { get; } = {"Queam name"};
     }
 }
