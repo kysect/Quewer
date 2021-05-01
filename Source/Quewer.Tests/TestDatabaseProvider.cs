@@ -1,12 +1,11 @@
 ﻿using System;
 
 using Microsoft.EntityFrameworkCore;
-
 using Quewer.Core.DataAccess;
 
 namespace Quewer.Tests
 {
-    public class TestDatabaseProvider
+    public static class TestDatabaseProvider
     {
         public static QuewerDbContext GetDatabaseContext()
         {

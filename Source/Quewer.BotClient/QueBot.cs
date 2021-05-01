@@ -3,7 +3,7 @@ using Kysect.BotFramework.ApiProviders;
 using Kysect.BotFramework.Core;
 using Quewer.BotClient.Commands.QueamCommands;
 using Quewer.BotClient.Commands.QueCommands;
-using Serilog;
+using Quewer.Tests;
 
 namespace Quewer.BotClient
 {
@@ -11,14 +11,15 @@ namespace Quewer.BotClient
     {
         private readonly BotManager _botInstance;
 
-        public QueBot(IBotApiProvider apiProvider, ILogger logger)
+        public QueBot(IBotApiProvider apiProvider/*, ILogger logger*/)
         {
             BotManagerBuilder builder = new BotManagerBuilder()
-                .AddLogger(logger)
+                //.AddLogger(logger)
                 .SetPrefix('/')
                 .AddCommand(new AddQueamQueserCommand.Descriptor())
                 .AddCommand(new AddQueamQueserCommand.Descriptor())
                 .AddCommand(new CreateQueamCommand.Descriptor())
+                .AddCommand(new GetQuemsCommand.Descriptor())
                 .AddCommand(new DeleteQueamCommand.Descriptor())
                 .AddCommand(new RemoveQueamQueserCommand.Descriptor())
                 .AddCommand(new CreateQueCommand.Descriptor())
@@ -26,6 +27,9 @@ namespace Quewer.BotClient
                 .AddCommand(new QuePopCommand.Descriptor())
                 .AddCommand(new QuePushCommand.Descriptor())
                 .AddCommand(new QueSwapCommand.Descriptor());
+
+            builder.ServiceCollection
+                .AddQuewerDatabase();
 
             _botInstance = builder.Build(apiProvider);
         }
