@@ -3,7 +3,7 @@ using Kysect.BotFramework.ApiProviders;
 using Kysect.BotFramework.Core;
 using Quewer.BotClient.Commands.QueamCommands;
 using Quewer.BotClient.Commands.QueCommands;
-using Quewer.Tests;
+using Quewer.BotClient.Tools;
 
 namespace Quewer.BotClient
 {
@@ -19,7 +19,7 @@ namespace Quewer.BotClient
                 .AddCommand(new AddQueamQueserCommand.Descriptor())
                 .AddCommand(new AddQueamQueserCommand.Descriptor())
                 .AddCommand(new CreateQueamCommand.Descriptor())
-                .AddCommand(new GetQuemsCommand.Descriptor())
+                .AddCommand(new GetQueamsCommand.Descriptor())
                 .AddCommand(new DeleteQueamCommand.Descriptor())
                 .AddCommand(new RemoveQueamQueserCommand.Descriptor())
                 .AddCommand(new CreateQueCommand.Descriptor())

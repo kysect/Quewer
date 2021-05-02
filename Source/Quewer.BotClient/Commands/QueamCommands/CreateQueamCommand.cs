@@ -43,7 +43,7 @@ namespace Quewer.BotClient.Commands.QueamCommands
             _context.Queams.Add(Queam.Create(args.Arguments[0], queser));
             _context.SaveChanges();
 
-            return Result.Ok<IBotMessage>(new BotTextMessage($"Created new quem: {args.Arguments[0]}"));
+            return Result.Ok<IBotMessage>(new BotTextMessage($"Created new queam: {args.Arguments[0]}"));
         }
     }
 }

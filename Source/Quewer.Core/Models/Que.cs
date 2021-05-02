@@ -28,7 +28,7 @@ namespace Quewer.Core.Models
 
         public QueQueamQueser Push(Queser queser, string comment)
         {
-            QueamQueser queamQueser = Queam.FindMember(queser) ?? throw QuewerException.IsNotQuemMember();
+            QueamQueser queamQueser = Queam.FindMember(queser) ?? throw QuewerException.IsNotQueamMember();
 
             //TODO: Add options that allowed to register many time
             if (QueQueamQuesers.Any(qqq => qqq.QueamQueser.Id == queamQueser.Id))

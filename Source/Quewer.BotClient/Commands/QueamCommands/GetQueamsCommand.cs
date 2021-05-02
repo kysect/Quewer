@@ -6,9 +6,9 @@ using Quewer.Core.DataAccess;
 
 namespace Quewer.BotClient.Commands.QueamCommands
 {
-    public class GetQuemsCommand : IBotSyncCommand
+    public class GetQueamsCommand : IBotSyncCommand
     {
-        public class Descriptor : BotCommandDescriptor<GetQuemsCommand>
+        public class Descriptor : BotCommandDescriptor<GetQueamsCommand>
         {
             public Descriptor() : base("get-queam", string.Empty)
             {
@@ -17,7 +17,7 @@ namespace Quewer.BotClient.Commands.QueamCommands
 
         private QuewerDbContext _context;
 
-        public GetQuemsCommand(QuewerDbContext context)
+        public GetQueamsCommand(QuewerDbContext context)
         {
             _context = context;
         }
@@ -29,8 +29,9 @@ namespace Quewer.BotClient.Commands.QueamCommands
 
         public Result<IBotMessage> Execute(CommandArgumentContainer args)
         {
+            //TODO: it's temp solution
             string message = string.Join(", ", _context.Queams.ToList().Select(q => q.Name));
-            return Result.Ok<IBotMessage>(new BotTextMessage($"Quems: {message}"));
+            return Result.Ok<IBotMessage>(new BotTextMessage($"Queams: {message}"));
         }
     }
 }

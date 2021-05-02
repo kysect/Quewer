@@ -8,7 +8,7 @@ namespace Quewer.Core.Tools
         {
         }
 
-        public static QuewerException IsNotQuemMember() => new QuewerException("Quser is not queam member");
+        public static QuewerException IsNotQueamMember() => new QuewerException("Quser is not queam member");
         public static QuewerException MemberAlreadyInQue() => new QuewerException("Member already in que");
     }
 }

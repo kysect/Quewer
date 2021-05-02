@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Kysect.BotFramework.ApiProviders.Telegram;
 using Kysect.BotFramework.Settings;
 using Quewer.BotClient;
@@ -7,7 +7,7 @@ namespace Quewer.Polygon
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var telegramToken = "";
 
