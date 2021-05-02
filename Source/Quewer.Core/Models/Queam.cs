@@ -32,7 +32,7 @@ namespace Quewer.Core.Models
 
         public Que CreateNewQue(Queser queser, string title)
         {
-            QueamQueser queamQueser = FindMember(queser) ?? throw QuewerException.IsNotQuemMember();
+            QueamQueser queamQueser = FindMember(queser) ?? throw QuewerException.IsNotQueamMember();
             if (queamQueser.Role != QueamQueserRole.Admin && queamQueser.Role != QueamQueserRole.Creator)
                 throw new QuewerException("Not enough permission");
 

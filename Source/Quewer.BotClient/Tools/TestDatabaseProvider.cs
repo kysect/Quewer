@@ -1,10 +1,8 @@
-﻿using System;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Quewer.Core.DataAccess;
 
-namespace Quewer.Tests
+namespace Quewer.BotClient.Tools
 {
     public static class TestDatabaseProvider
     {
