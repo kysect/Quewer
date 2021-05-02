@@ -6,6 +6,13 @@ namespace Quewer.BotClient.Commands.QueCommands
 {
     public class QueSwapCommand : IBotCommand
     {
+        public class Descriptor : BotCommandDescriptor<QueSwapCommand>
+        {
+            public Descriptor() : base("que-swap", string.Empty, new[] { "Que name", "Queser id" })
+            {
+            }
+        }
+
         public Result CanExecute(CommandArgumentContainer args)
         {
             throw new System.NotImplementedException();
@@ -15,9 +22,5 @@ namespace Quewer.BotClient.Commands.QueCommands
         {
             throw new System.NotImplementedException();
         }
-
-        public string CommandName { get; } = "que-swap";
-        public string Description { get; }
-        public string[] Args { get; } = { "Que name", "Queser id" };
     }
 }
