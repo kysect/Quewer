@@ -10,28 +10,31 @@ namespace Quewer.Core.Models
         public Guid Id { get; set; }
         public string Title { get; set; }
         public DateTime CreationTimeUtc { get; set; }
+        public bool AllowMoreThanOneActivePush { get; set; }
 
         public virtual Queam Queam { get; set; }
         public virtual List<QueQueamQueser> QueQueamQuesers { get; set; }
 
-        public static Que Create(Queam queam, string title)
+        public Que(Guid id, string title, DateTime creationTimeUtc, bool allowMoreThanOneActivePush, Queam queam, List<QueQueamQueser> queQueamQuesers)
         {
-            return new Que
-            {
-                Id = Guid.NewGuid(),
-                Queam = queam,
-                Title = title,
-                CreationTimeUtc = DateTime.UtcNow,
-                QueQueamQuesers = new List<QueQueamQueser>()
-            };
+            Id = id;
+            Title = title;
+            CreationTimeUtc = creationTimeUtc;
+            AllowMoreThanOneActivePush = allowMoreThanOneActivePush;
+            Queam = queam;
+            QueQueamQuesers = queQueamQuesers;
+        }
+
+        public Que(Queam queam, string title, bool allowMoreThanOnePush = false)
+            : this(Guid.NewGuid(), title, DateTime.UtcNow, allowMoreThanOnePush, queam, new List<QueQueamQueser>())
+        {
         }
 
         public QueQueamQueser Push(Queser queser, string comment)
         {
             QueamQueser queamQueser = Queam.FindMember(queser) ?? throw QuewerException.IsNotQueamMember();
 
-            //TODO: Add options that allowed to register many time
-            if (QueQueamQuesers.Any(qqq => qqq.QueamQueser.Id == queamQueser.Id))
+            if (!AllowMoreThanOneActivePush && QueQueamQuesers.Any(qqq => qqq.QueamQueser.Id == queamQueser.Id))
                 throw QuewerException.MemberAlreadyInQue();
 
             var queQueamQueser = QueQueamQueser.Create(this, queamQueser, comment);
