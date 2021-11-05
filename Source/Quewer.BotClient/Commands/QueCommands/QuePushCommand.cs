@@ -12,6 +12,7 @@ namespace Quewer.BotClient.Commands.QueCommands
             {
             }
         }
+
         public Result CanExecute(CommandContainer args)
         {
             throw new System.NotImplementedException();
