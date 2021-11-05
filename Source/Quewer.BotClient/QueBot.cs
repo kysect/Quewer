@@ -3,6 +3,7 @@ using Kysect.BotFramework.ApiProviders;
 using Kysect.BotFramework.Core;
 using Quewer.BotClient.Commands.QueamCommands;
 using Quewer.BotClient.Commands.QueCommands;
+using Quewer.BotClient.Commands.QueserCommands;
 using Quewer.BotClient.Tools;
 
 namespace Quewer.BotClient
@@ -26,7 +27,9 @@ namespace Quewer.BotClient
                 .AddCommand(new DeleteQueCommand.Descriptor())
                 .AddCommand(new QuePopCommand.Descriptor())
                 .AddCommand(new QuePushCommand.Descriptor())
-                .AddCommand(new QueSwapCommand.Descriptor());
+                .AddCommand(new QueSwapCommand.Descriptor())
+                .AddCommand(new RegisterQueser.Descriptor())
+                ;
 
             builder.ServiceCollection
                 .AddQuewerDatabase();
