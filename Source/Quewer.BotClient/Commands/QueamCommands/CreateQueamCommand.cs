@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentResults;
 using Kysect.BotFramework.Core.BotMessages;
-using Kysect.BotFramework.Core.CommandInvoking;
+using Kysect.BotFramework.Core.Commands;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Quewer.Core.DataAccess;
 using Quewer.Core.Models;
@@ -25,14 +25,14 @@ namespace Quewer.BotClient.Commands.QueamCommands
             _context = context;
         }
 
-        public Result CanExecute(CommandArgumentContainer args)
+        public Result CanExecute(CommandContainer args)
         {
             return Result.Ok(true);
         }
 
-        public Result<IBotMessage> Execute(CommandArgumentContainer args)
+        public Result<IBotMessage> Execute(CommandContainer args)
         {
-            //TODO: HACK
+            // TODO: HACK
             Queser queser = _context.Quesers.Find(TempKey);
             if (queser is null)
             {
