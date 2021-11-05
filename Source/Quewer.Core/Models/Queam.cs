@@ -30,13 +30,13 @@ namespace Quewer.Core.Models
             return new Queam(name, creator);
         }
 
-        public Que CreateNewQue(Queser queser, string title)
+        public Que CreateNewQue(Queser queser, string title, bool allowMoreThanOnePush = false)
         {
             QueamQueser queamQueser = FindMember(queser) ?? throw QuewerException.IsNotQueamMember();
             if (queamQueser.Role != QueamQueserRole.Admin && queamQueser.Role != QueamQueserRole.Creator)
                 throw new QuewerException("Not enough permission");
 
-            var que = Que.Create(this, title);
+            var que = new Que(this, title, allowMoreThanOnePush);
 
             Ques.Add(que);
             return que;
