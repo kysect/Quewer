@@ -33,15 +33,13 @@ namespace Quewer.BotClient.Commands.QueamCommands
 
         public Result CanExecute(CommandContainer args)
         {
-            return Result.Ok(true);
+            return Result.Ok();
         }
 
         public Result<IBotMessage> Execute(CommandContainer args)
         {
             var arguments = new Arguments(args);
-
             Queser queser = _context.Quesers.Find(arguments.SenderId);
-
             if (queser is null)
                 return Result.Fail("Queser was not registered");
 
