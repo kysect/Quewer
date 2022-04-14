@@ -14,9 +14,9 @@ namespace Quewer.Core.Services
             _context = context;
         }
 
-        public Queser CreateQueser(string name)
+        public Queser CreateQueser(long id, string name)
         {
-            var queser = Queser.Create(name);
+            var queser = new Queser(id, name);
             _context.Quesers.Add(queser);
             _context.SaveChanges();
 

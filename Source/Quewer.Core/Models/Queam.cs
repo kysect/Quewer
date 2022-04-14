@@ -13,7 +13,7 @@ namespace Quewer.Core.Models
         public virtual List<QueamQueser> QueamQuesers { get; private set; }
         public virtual List<Que> Ques { get; private set; }
 
-        private Queam(String name, Queser creator) : this()
+        public Queam(String name, Queser creator) : this()
         {
             Id = Guid.NewGuid();
             Name = name;
