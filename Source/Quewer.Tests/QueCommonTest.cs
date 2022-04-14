@@ -17,8 +17,8 @@ namespace Quewer.Tests
         [Test]
         public void PushToQue_EnsureUserInQue()
         {
-            var queser1 = Queser.Create("Name1");
-            var queam = Queam.Create("Team 1", queser1);
+            var queser1 = new Queser(1, "Name1");
+            var queam = new Queam("Team 1", queser1);
             Que que = queam.CreateNewQue(queser1, "Que");
 
             que.Push(queser1, null);
@@ -32,7 +32,7 @@ namespace Quewer.Tests
             QuewerDbContext quewerDbContext = TestDatabaseProvider.GetDatabaseContext();
             var quewerService = new QuewerService(quewerDbContext);
 
-            quewerService.CreateQueser("name");
+            quewerService.CreateQueser(1, "name");
             List<Queser> quesers = quewerService.ReadAll();
 
             Assert.AreEqual(1, quesers.Count);

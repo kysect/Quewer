@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using FluentResults;
 using Kysect.BotFramework.Core.BotMessages;
-using Kysect.BotFramework.Core.CommandInvoking;
+using Kysect.BotFramework.Core.Commands;
 using Quewer.Core.DataAccess;
 
 namespace Quewer.BotClient.Commands.QueamCommands
@@ -15,19 +15,19 @@ namespace Quewer.BotClient.Commands.QueamCommands
             }
         }
 
-        private QuewerDbContext _context;
+        private readonly QuewerDbContext _context;
 
         public GetQueamsCommand(QuewerDbContext context)
         {
             _context = context;
         }
 
-        public Result CanExecute(CommandArgumentContainer args)
+        public Result CanExecute(CommandContainer args)
         {
             return Result.Ok(true);
         }
 
-        public Result<IBotMessage> Execute(CommandArgumentContainer args)
+        public Result<IBotMessage> Execute(CommandContainer args)
         {
             //TODO: it's temp solution
             string message = string.Join(", ", _context.Queams.ToList().Select(q => q.Name));
