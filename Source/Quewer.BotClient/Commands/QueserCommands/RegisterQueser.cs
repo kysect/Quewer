@@ -16,7 +16,7 @@ namespace Quewer.BotClient.Commands.QueserCommands
             private readonly CommandContainer _command;
 
             public Arguments(CommandContainer command) => _command = command;
-            public long SenderId => _command.Context.SenderInfo.UserSenderId;
+            public long SenderId => _command.SenderInfo.UserSenderId;
             public string Username => _command.Arguments[0];
         }
 

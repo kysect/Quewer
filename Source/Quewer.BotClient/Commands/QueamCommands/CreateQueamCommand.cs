@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Kysect.BotFramework.Core.BotMessages;
 using Kysect.BotFramework.Core.Commands;
+using Kysect.BotFramework.Core.Exceptions;
 using Kysect.BotFramework.Core.Tools;
 using Quewer.Core.DataAccess;
 using Quewer.Core.Models;
@@ -15,7 +16,7 @@ namespace Quewer.BotClient.Commands.QueamCommands
             private readonly CommandContainer _command;
 
             public Arguments(CommandContainer command) => _command = command;
-            public long SenderId => _command.Context.SenderInfo.UserSenderId;
+            public long SenderId => _command.SenderInfo.UserSenderId;
             public string QueamName => _command.Arguments[0];
         }
 
@@ -36,12 +37,12 @@ namespace Quewer.BotClient.Commands.QueamCommands
             var arguments = new Arguments(args);
             Queser queser = await _context.Quesers.FindAsync(arguments.SenderId);
             if (queser is null)
-                return Result.Fail("Queser was not registered");
+                throw new BotException("Queser was not registered");
 
             _context.Queams.Add(new Queam(arguments.QueamName, queser));
             await _context.SaveChangesAsync();
 
-            return Result.Ok<IBotMessage>(new BotTextMessage($"Created new queam: {args.Arguments[0]}"));
+            return new BotTextMessage($"Created new queam: {args.Arguments[0]}");
         }
     }
 }
