@@ -1,20 +1,15 @@
 ﻿using System.Linq;
-using FluentResults;
+using System.Threading.Tasks;
 using Kysect.BotFramework.Core.BotMessages;
 using Kysect.BotFramework.Core.Commands;
+using Kysect.BotFramework.Core.Tools;
 using Quewer.Core.DataAccess;
 
 namespace Quewer.BotClient.Commands.QueamCommands
 {
-    public class GetQueamsCommand : IBotSyncCommand
+    [BotCommandDescriptor("get-queam", "")]
+    public class GetQueamsCommand : IBotCommand
     {
-        public class Descriptor : BotCommandDescriptor<GetQueamsCommand>
-        {
-            public Descriptor() : base("get-queam", string.Empty)
-            {
-            }
-        }
-
         private readonly QuewerDbContext _context;
 
         public GetQueamsCommand(QuewerDbContext context)
@@ -24,14 +19,14 @@ namespace Quewer.BotClient.Commands.QueamCommands
 
         public Result CanExecute(CommandContainer args)
         {
-            return Result.Ok(true);
+            return Result.Ok();
         }
 
-        public Result<IBotMessage> Execute(CommandContainer args)
+        public async Task<IBotMessage> Execute(CommandContainer args)
         {
             //TODO: it's temp solution
             string message = string.Join(", ", _context.Queams.ToList().Select(q => q.Name));
-            return Result.Ok<IBotMessage>(new BotTextMessage($"Queams: {message}"));
+            return new BotTextMessage($"Queams: {message}");
         }
     }
 }

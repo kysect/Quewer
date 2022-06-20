@@ -1,20 +1,16 @@
 ﻿using System.Linq;
-using FluentResults;
+using System.Threading.Tasks;
 using Kysect.BotFramework.Core.BotMessages;
 using Kysect.BotFramework.Core.Commands;
+using Kysect.BotFramework.Core.Tools;
 using Quewer.Core.DataAccess;
 using Quewer.Core.Models;
 
 namespace Quewer.BotClient.Commands.QueCommands
 {
-    public class CreateQueCommand : IBotSyncCommand
+    [BotCommandDescriptor("create-que", "", "Queam name", "Que name")]
+    public class CreateQueCommand : IBotCommand
     {
-        public class Descriptor : BotCommandDescriptor<CreateQueCommand>
-        {
-            public Descriptor() : base("create-que", string.Empty, new[] { "Queam name", "Que name" })
-            {
-            }
-        }
         private class Arguments
         {
             private readonly CommandContainer _command;
@@ -37,10 +33,10 @@ namespace Quewer.BotClient.Commands.QueCommands
             return Result.Ok();
         }
 
-        public Result<IBotMessage> Execute(CommandContainer args)
+        public async Task<IBotMessage> Execute(CommandContainer args)
         {
             var arguments = new Arguments(args);
-            Queser queser = _context.Quesers.Find(arguments.SenderId);
+            Queser queser = await _context.Quesers.FindAsync(arguments.SenderId);
             if (queser is null)
                 return Result.Fail("Queser was not registered");
 
@@ -51,9 +47,9 @@ namespace Quewer.BotClient.Commands.QueCommands
             Que que = queam.CreateNewQue(queser, arguments.QueName);
 
             _context.Ques.Add(que);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            return Result.Ok<IBotMessage>(new BotTextMessage($"Que {que.Title} was crated."));
+            return new BotTextMessage($"Que {que.Title} was crated.");
         }
     }
 }

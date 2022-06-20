@@ -1,24 +1,19 @@
-﻿using FluentResults;
+﻿using System.Threading.Tasks;
 using Kysect.BotFramework.Core.BotMessages;
 using Kysect.BotFramework.Core.Commands;
+using Kysect.BotFramework.Core.Tools;
 
 namespace Quewer.BotClient.Commands.QueamCommands
 {
-    public class DeleteQueamCommand : IBotSyncCommand
+    [BotCommandDescriptor("delete-queam", "", "Queam name")]
+    public class DeleteQueamCommand : IBotCommand
     {
-        public class Descriptor : BotCommandDescriptor<DeleteQueamCommand>
-        {
-            public Descriptor() : base("delete-queam", string.Empty, new[] { "Queam name" })
-            {
-            }
-        }
-
         public Result CanExecute(CommandContainer args)
         {
             throw new System.NotImplementedException();
         }
 
-        public Result<IBotMessage> Execute(CommandContainer args)
+        public async Task<IBotMessage> Execute(CommandContainer args)
         {
             throw new System.NotImplementedException();
         }
