@@ -1,21 +1,16 @@
 ﻿using System.Linq;
-using FluentResults;
+using System.Threading.Tasks;
 using Kysect.BotFramework.Core.BotMessages;
 using Kysect.BotFramework.Core.Commands;
+using Kysect.BotFramework.Core.Tools;
 using Quewer.Core.DataAccess;
 using Quewer.Core.Models;
 
 namespace Quewer.BotClient.Commands.QueserCommands
 {
-    public class RegisterQueser : IBotSyncCommand
+    [BotCommandDescriptor("register", "Use this command for register in system.", "Queser name")]
+    public class RegisterQueser : IBotCommand
     {
-        public class Descriptor : BotCommandDescriptor<RegisterQueser>
-        {
-            public Descriptor() : base("register", "Use this command for register in system.", new[] { "Queser name" })
-            {
-            }
-        }
-
         private class Arguments
         {
             private readonly CommandContainer _command;
@@ -47,14 +42,14 @@ namespace Quewer.BotClient.Commands.QueserCommands
             return Result.Ok();
         }
 
-        public Result<IBotMessage> Execute(CommandContainer args)
+        public async Task<IBotMessage> Execute(CommandContainer args)
         {
             var arguments = new Arguments(args);
 
             _context.Quesers.Add(new Queser(arguments.SenderId, arguments.Username));
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            return Result.Ok<IBotMessage>(new BotTextMessage($"User {arguments.Username} with id {arguments.SenderId} registered"));
+            return new BotTextMessage($"User {arguments.Username} with id {arguments.SenderId} registered");
         }
     }
 }
