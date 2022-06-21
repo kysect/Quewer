@@ -15,7 +15,7 @@ namespace Quewer.Core.Models
         public virtual Queam Queam { get; set; }
         public virtual List<QueQueamQueser> QueQueamQuesers { get; set; }
 
-        public Que()
+        protected Que()
         {
         }
 
