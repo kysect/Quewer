@@ -1,24 +1,19 @@
-﻿using FluentResults;
+﻿using System.Threading.Tasks;
 using Kysect.BotFramework.Core.BotMessages;
 using Kysect.BotFramework.Core.Commands;
+using Kysect.BotFramework.Core.Tools;
 
 namespace Quewer.BotClient.Commands.QueCommands
 {
-    public class QueSwapCommand : IBotSyncCommand
+    [BotCommandDescriptor("que-swap", "", "Que name", "Queser id")]
+    public class QueSwapCommand : IBotCommand
     {
-        public class Descriptor : BotCommandDescriptor<QueSwapCommand>
-        {
-            public Descriptor() : base("que-swap", string.Empty, new[] { "Que name", "Queser id" })
-            {
-            }
-        }
-
         public Result CanExecute(CommandContainer args)
         {
             throw new System.NotImplementedException();
         }
 
-        public Result<IBotMessage> Execute(CommandContainer args)
+        public async Task<IBotMessage> Execute(CommandContainer args)
         {
             throw new System.NotImplementedException();
         }

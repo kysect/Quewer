@@ -15,6 +15,10 @@ namespace Quewer.Core.Models
         public virtual Queam Queam { get; set; }
         public virtual List<QueQueamQueser> QueQueamQuesers { get; set; }
 
+        protected Que()
+        {
+        }
+
         public Que(Guid id, string title, DateTime creationTimeUtc, bool allowMoreThanOneActivePush, Queam queam, List<QueQueamQueser> queQueamQuesers)
         {
             Id = id;
