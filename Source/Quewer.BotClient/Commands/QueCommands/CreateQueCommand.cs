@@ -39,11 +39,11 @@ namespace Quewer.BotClient.Commands.QueCommands
             var arguments = new Arguments(args);
             Queser queser = await _context.Quesers.FindAsync(arguments.SenderId);
             if (queser is null)
-                throw new BotException("Queser was not registered");
+                return new BotTextMessage("Queser was not registered");
 
             Queam queam = _context.Queams.SingleOrDefault(q => q.Name.Equals(arguments.QueamName));
             if (queam is null)
-                throw new BotException("Queam was not found");
+                return new BotTextMessage("Queam was not found");
 
             Que que = queam.CreateNewQue(queser, arguments.QueName);
 

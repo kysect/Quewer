@@ -37,7 +37,7 @@ namespace Quewer.BotClient.Commands.QueamCommands
             var arguments = new Arguments(args);
             Queser queser = await _context.Quesers.FindAsync(arguments.SenderId);
             if (queser is null)
-                throw new BotException("Queser was not registered");
+                return new BotTextMessage("Queser was not registered");
 
             _context.Queams.Add(new Queam(arguments.QueamName, queser));
             await _context.SaveChangesAsync();
