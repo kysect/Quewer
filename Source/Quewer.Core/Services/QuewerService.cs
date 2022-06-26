@@ -3,29 +3,28 @@ using System.Linq;
 using Quewer.Core.DataAccess;
 using Quewer.Core.Models;
 
-namespace Quewer.Core.Services
+namespace Quewer.Core.Services;
+
+public class QuewerService
 {
-    public class QuewerService
+    private readonly QuewerDbContext _context;
+
+    public QuewerService(QuewerDbContext context)
     {
-        private readonly QuewerDbContext _context;
+        _context = context;
+    }
 
-        public QuewerService(QuewerDbContext context)
-        {
-            _context = context;
-        }
+    public Queser CreateQueser(long id, string name)
+    {
+        var queser = new Queser(id, name);
+        _context.Quesers.Add(queser);
+        _context.SaveChanges();
 
-        public Queser CreateQueser(long id, string name)
-        {
-            var queser = new Queser(id, name);
-            _context.Quesers.Add(queser);
-            _context.SaveChanges();
+        return queser;
+    }
 
-            return queser;
-        }
-
-        public List<Queser> ReadAll()
-        {
-            return _context.Quesers.ToList();
-        }
+    public List<Queser> ReadAll()
+    {
+        return _context.Quesers.ToList();
     }
 }
