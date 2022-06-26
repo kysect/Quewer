@@ -3,21 +3,20 @@
 using Microsoft.EntityFrameworkCore;
 using Quewer.Core.DataAccess;
 
-namespace Quewer.Tests
+namespace Quewer.Tests;
+
+public static class TestDatabaseProvider
 {
-    public static class TestDatabaseProvider
+    public static QuewerDbContext GetDatabaseContext()
     {
-        public static QuewerDbContext GetDatabaseContext()
-        {
-            DbContextOptions<QuewerDbContext> options = new DbContextOptionsBuilder<QuewerDbContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .UseLazyLoadingProxies()
-                .Options;
+        DbContextOptions<QuewerDbContext> options = new DbContextOptionsBuilder<QuewerDbContext>()
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .UseLazyLoadingProxies()
+            .Options;
 
-            var databaseContext = new QuewerDbContext(options);
-            databaseContext.Database.EnsureCreated();
+        var databaseContext = new QuewerDbContext(options);
+        databaseContext.Database.EnsureCreated();
 
-            return databaseContext;
-        }
+        return databaseContext;
     }
 }
