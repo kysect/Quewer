@@ -6,45 +6,45 @@ using Quewer.BotClient.Commands.QueCommands;
 using Quewer.BotClient.Commands.QueserCommands;
 using Quewer.BotClient.Tools;
 
-namespace Quewer.BotClient
+namespace Quewer.BotClient;
+
+public class QueBot : IDisposable
 {
-    public class QueBot : IDisposable
+    private readonly BotManager _botInstance;
+
+    public QueBot(IBotApiProvider apiProvider/*, ILogger logger*/)
     {
-        private readonly BotManager _botInstance;
+        BotManagerBuilder builder = new BotManagerBuilder()
+            //.AddLogger(logger)
+            .SetPrefix('/')
+            //.EnableErrorLogToUser()
+            .AddCommand<AddQueamQueserCommand>()
+            .AddCommand<AddQueamQueserCommand>()
+            .AddCommand<CreateQueamCommand>()
+            .AddCommand<GetQueamsCommand>()
+            .AddCommand<DeleteQueamCommand>()
+            .AddCommand<RemoveQueamQueserCommand>()
+            .AddCommand<CreateQueCommand>()
+            .AddCommand<DeleteQueCommand>()
+            .AddCommand<QuePopCommand>()
+            .AddCommand<QuePushCommand>()
+            .AddCommand<QueSwapCommand>()
+            .AddCommand<RegisterQueser>()
+            ;
 
-        public QueBot(IBotApiProvider apiProvider/*, ILogger logger*/)
-        {
-            BotManagerBuilder builder = new BotManagerBuilder()
-                //.AddLogger(logger)
-                .SetPrefix('/')
-                .AddCommand<AddQueamQueserCommand>()
-                .AddCommand<AddQueamQueserCommand>()
-                .AddCommand<CreateQueamCommand>()
-                .AddCommand<GetQueamsCommand>()
-                .AddCommand<DeleteQueamCommand>()
-                .AddCommand<RemoveQueamQueserCommand>()
-                .AddCommand<CreateQueCommand>()
-                .AddCommand<DeleteQueCommand>()
-                .AddCommand<QuePopCommand>()
-                .AddCommand<QuePushCommand>()
-                .AddCommand<QueSwapCommand>()
-                .AddCommand<RegisterQueser>()
-                ;
+        builder.ServiceCollection
+            .AddQuewerDatabase();
 
-            builder.ServiceCollection
-                .AddQuewerDatabase();
+        _botInstance = builder.Build(apiProvider);
+    }
 
-            _botInstance = builder.Build(apiProvider);
-        }
+    public void Start()
+    {
+        _botInstance.Start();
+    }
 
-        public void Start()
-        {
-            _botInstance.Start();
-        }
-
-        public void Dispose()
-        {
-            _botInstance?.Dispose();
-        }
+    public void Dispose()
+    {
+        _botInstance?.Dispose();
     }
 }
